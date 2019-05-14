@@ -6,6 +6,8 @@ from django.db import models
 class BookInfo(models.Model):
     bttile = models.CharField(max_length=30)
     bdate = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.bttile
 #英雄表
 class HeroInfo(models.Model):
     name = models.CharField(max_length=30)
@@ -16,5 +18,9 @@ class HeroInfo(models.Model):
     # ForeignKey 表名和BookInfo为多对一关系 所以在多地一方设置外键
     # book 的类型 BookInfo
     book = models.ForeignKey(BookInfo, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
+
+
 
 
