@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>书城列表</title>
+</head>
+<body>
+    <h2>图书列表页</h2>
+    {% if allbook %}
+        <ul>
+            {%for book in allbook%}
+            <li><a href="/booktest/detail/{{book.id }}">{{ book.bttile }}</a></li>
+            {% empty %}
+            没有书籍信息
+            {% endfor %}
+        </ul>
+
+    {% else  %}
+        没有接收到书籍
+    {% endif %}
+
+<a href="/booktest/index/">返回首页</a>
+</body>
+</html>

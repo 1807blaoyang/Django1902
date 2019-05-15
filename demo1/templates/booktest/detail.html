@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍详情</title>
+</head>
+<body>
+<h1>详情页</h1>
+<!--测试代码-->
+    <!--{% if book %}-->
+    <!--收到详情-->
+    <!--{% else %}-->
+    <!--未收到详情-->
+    <!--{%endif %}-->
+{% if book %}
+    <h3>{{book.bttile}}</h3>
+        <ul>
+            {% for hero in book.heroinfo_set.all %}
+                <li>---{{ hero.name }}---{{ hero.gender }}---{{ hero.skill }}---</li>
+
+        {% endfor %}
+        </ul>
+
+{% else %}
+未接收到书籍
+{% endif %}
+<a href="/booktest/list/">返回书城</a>
+</body>
+</html>
