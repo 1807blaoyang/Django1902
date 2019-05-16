@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>书城列表</title>
+     <link rel="stylesheet" href="/static/css/main.css/">
 </head>
 <body>
+<div class="container">
     <h2>图书列表页</h2>
     {% if allbook %}
         <ul>
             {%for book in allbook%}
-            <li><a href="/booktest/detail/{{book.id }}">{{ book.bttile }}</a></li>
+            {# <a href="/booktest/detail/{{book.id}}">{{ book.bttile }}</a>  #}
+
+            <li><h4><a href="/booktest/detail/{{book.id}}">{{ book.bttile }}</a>
+                     <a href="/booktest/deletebook/{{book.id}}">删除</a>
+                     <a href="/booktest/addbook/{{book.id}}">增加图书</a></h4></li>
             {% empty %}
             没有书籍信息
             {% endfor %}
@@ -20,5 +26,6 @@
     {% endif %}
 
 <a href="/booktest/index/">返回首页</a>
+</div>
 </body>
 </html>

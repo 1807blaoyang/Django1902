@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>书籍详情</title>
+     <link rel="stylesheet" href="/static/css/main.css/">
 </head>
 <body>
+<div class="container">
 <h1>详情页</h1>
 <!--测试代码-->
     <!--{% if book %}-->
@@ -15,15 +17,19 @@
 {% if book %}
     <h3>{{book.bttile}}</h3>
         <ul>
+            <!--为什么路径可以直接使用hero.info    就在这一步代码：获得了所有的英雄-->
             {% for hero in book.heroinfo_set.all %}
-                <li>---{{ hero.name }}---{{ hero.gender }}---{{ hero.skill }}---</li>
+                <li>---{{ hero.name }}---{{ hero.gender }}---{{ hero.skill }}---<a href="/booktest/deletehero/{{hero.id}}">删除</a></li>
+            {% empty %}
+            无角色
 
-        {% endfor %}
+            {% endfor %}
         </ul>
-
+    <a href="/booktest/addhero/{{ book.id }}">添加角色</a>
 {% else %}
 未接收到书籍
 {% endif %}
-<a href="/booktest/list/">返回书城</a>
+    <a href="/booktest/list/">返回书城</a>
+</div>
 </body>
 </html>
