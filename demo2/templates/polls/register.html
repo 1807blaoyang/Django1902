@@ -6,14 +6,43 @@
     <link rel="stylesheet" href="/static/css/main.css/">
 </head>
 <body>
+<div class="img1">
+    <img src="/static/img/logo.png">
+    <div class="text"></div>
+</div>
+
 <div class="container">
-    <h3>注册</h3>
-    <b>{{err}}</b>
-    <form action="{%url 'polls:register' %}" method="post">
-        用户名：<input type="text" name="username"><br><br>
-        密码：  <input type="password" name="pwd" ><br><br>
-        <input type="submit" name="tijiao" value="注册">
-    </form>
+    <img src="/static/img/zhuce.gif" class="img">
+     <div id="form_input">
+         <h2>欢迎来到投票系统</h2>
+         <h3>注册 | <a href="{%url 'polls:login'%}">立即登录</a></h3><hr>
+         <b>{{err}}</b>
+
+        <form action="{%url 'polls:register' %}" method="post">
+            <!--防止跨站请求伪造-->
+            {% csrf_token %}
+            <input type="text" name="username" class="name_input" placeholder="请输入用户名"><br><br>
+            <!--<div class="user_error">输入错误</div>-->
+
+            <input type="password" name="pwd" class="pass_input" placeholder="请输入密码"><br>
+            <!--<div class="pwd_error">输入错误</div>-->
+            <br><input type="submit" name="" value="注册" class="input_submit">
+
+        </form>
+    </div>
+    <div class="footer no-mp">
+		<div class="foot_link">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">招聘人才</a>
+			<span>|</span>
+			<a href="#">友情链接</a>
+		</div>
+		<p>CopyRight © 2016 河南奇酷信息技术有限公司 All Rights Reserved</p>
+		<p>电话：010-****888    京ICP备*******8号</p>
+	</div>
 </div>
 </body>
 </html>

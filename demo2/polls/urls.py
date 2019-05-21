@@ -15,6 +15,8 @@ urlpatterns = [
     url(r'^result/(\d+)/$', views.result, name="result"),
     # 验证登陆
     url(r'^login/$',views.login,name="login"),
+    # 安全退出
+    url(r'logout/$',views.logout,name="logout"),
     # 注册
     url(r'^register/$', views.register, name="register"),
 ]

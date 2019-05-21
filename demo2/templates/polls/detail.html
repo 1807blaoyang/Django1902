@@ -19,6 +19,7 @@
     <!--<h3>{{question.choice_set.all}}</h3>-->
     <!--接除硬编码方法-->
     <form action="{% url 'polls:detail' question.id %}" method="post">
+          {% csrf_token %}
         <!--添加默认选项，首先利用循环时产生的forloop点上一个counter 显示循环遍历的次数数字-->
         {%for c in question.choice_set.all %}
             {% if forloop.first%}

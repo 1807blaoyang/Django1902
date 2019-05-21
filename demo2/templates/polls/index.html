@@ -8,7 +8,8 @@
 <body>
 
     <div class="container">
-          <h2>欢迎{{username}}来到投票系统</h2>
+          <h2>欢迎来到投票系统</h2>
+        <h4>当前用户：{{username}} | <a href="{%url 'polls:logout' %}">安全退出</a></h4>
         {% if latest_poll_list %}
         <ul>
             {% for poll in latest_poll_list %}
