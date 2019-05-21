@@ -1,0 +1,13 @@
+.container{
+    width: 100%;
+    margin: 0 auto;
+    background: tan;
+    ;
+}
+.container a{
+    /*去除文字下划线*/
+    text-decoration:none
+    }
+.container b{
+    color: red;
+}

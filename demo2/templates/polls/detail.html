@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请投票</title>
+      <link rel="stylesheet" href="/static/css/main.css/">
+</head>
+<body>
+<div class="container">
+<h3>请投票</h3>
+    <h4>{{question}}</h4>
+<!--测试代码-->
+    <!--{% if book %}-->
+    <!--收到详情-->
+    <!--{% else %}-->
+    <!--未收到详情-->
+    <!--{%endif %}-->
+{% if question %}
+    <!--<h3>{{question.choice_set.all}}</h3>-->
+    <!--接除硬编码方法-->
+    <form action="{% url 'polls:detail' question.id %}" method="post">
+        <!--添加默认选项，首先利用循环时产生的forloop点上一个counter 显示循环遍历的次数数字-->
+        {%for c in question.choice_set.all %}
+            {% if forloop.first%}
+                {{forloop.counter}}<input type="radio" name="choice" value="{{c.id}}" checked>{{c.choice_text}}<br>
+            {%else%}
+                 {{forloop.counter}}<input type="radio" name="choice" value="{{c.id}}" >{{c.choice_text}}<br>
+            {%endif%}
+
+        {% empty %}
+        {% endfor %}
+           <br> <input type="submit" name="tijiao" value="投票">
+    </form>
+{% else %}
+未收到数据
+{% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果页</title>
+  <link rel="stylesheet" href="/static/css/main.css/">
+</head>
+<body>
+
+</body>
+<style type="text/css">
+    .container a{
+        text-decoration:none
+    }
+</style>
+<div class="container">
+     <h2>投票详情</h2>
+      <h4>{{question}}</h4>
+    <ul>
+       {% for c in question.choice_set.all %}
+        <li>
+            {{c.choice_text}}:{{c.votes}}
+        </li>
+        {%endfor%}
+    </ul>
+    <a href="/polls/index/">返回</a>
+</div>
+
+
+
+</html>
