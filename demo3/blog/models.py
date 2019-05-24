@@ -1,6 +1,7 @@
 from django.db import models
 # 少见一张表，直接用django里面自带的user表
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 # Create your models here.
 # 分类
 class Classify(models.Model):
@@ -51,6 +52,31 @@ class Article(models.Model):
         verbose_name = "文章表"
         # 去除s
         verbose_name_plural = verbose_name
+
+# 联系类
+class MessageInfo(models.Model):
+    username = models.CharField(max_length=20,verbose_name="姓名")
+    print(username)
+    email = models.EmailField(blank=True,null=True)
+    subject = models.CharField(max_length=100)
+    # 非原生类型
+    info = HTMLField()
+
+
+# 上传图片
+class Addimg(models.Model):
+    img = models.ImageField(upload_to="img",verbose_name="图片")
+    desc = models.CharField(max_length=30,verbose_name="图片描述")
+
+    def __str__(self):
+        return  self.desc
+    class Meta():
+        verbose_name= "图片"
+        verbose_name_plural = verbose_name
+
+
+
+
 
 
 

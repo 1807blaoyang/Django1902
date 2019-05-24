@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义头像</title>
+</head>
+<body>
+<!--注意事项，这里与传统的form表单不同，多加了一项参数，multioart/form-data-->
+<form href="#" action="{% url 'blog:addimg' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="img">
+    <br>
+    <input type="text" name="desc">
+    <br>
+    <input type="submit" name="tijiao" value="确定">
+</form>
+
+</body>
+</html>

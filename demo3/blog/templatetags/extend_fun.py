@@ -1,7 +1,7 @@
 # 此文件为自建扩展功能模块
 # 导入模块
 from django import template
-from blog.models import Article,Classify,Tag
+from blog.models import Article,Classify,Tag,Addimg
 # 注册模块
 register = template.Library()
 
@@ -34,5 +34,10 @@ def getclassify():
 @register.simple_tag()
 def gettag():
     return Tag.objects.all()
+
+# 轮播图  获取数据库所有图片（注意  图像 并非直接保存于数据库，数据库中存的是路径）
+@register.simple_tag()
+def getaddimg():
+    return Addimg.objects.all()
 
 
