@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--将自建标签引入-->
+{% load extend_fun %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {%endblock%}</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+    <link rel="stylesheet" href="/static/css/pace.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+
+    <!-- js -->
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/pace.min.js"></script>
+    <script src="/static/js/modernizr.custom.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <header id="site-header">
+        <div class="row">
+            <div class="col-md-4 col-sm-5 col-xs-8">
+                <div class="logo">
+                    <h1><a href="index.html"><b>Black</b> &amp; White</a></h1>
+                </div>
+            </div><!-- col-md-4 -->
+            <div class="col-md-8 col-sm-7 col-xs-4">
+                <nav class="main-nav" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" id="trigger-overlay" class="navbar-toggle">
+                            <span class="ion-navicon"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="cl-effect-11"><a href="index.html" data-hover="首页">首页</a></li>
+                            <li class="cl-effect-11"><a href="full-width.html" data-hover="博客">博客</a></li>
+                            <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
+                            <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+                <div id="header-search-box">
+                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+                    <div id="search-form" class="search-form">
+                        <form role="search" method="get" id="searchform" action="#">
+                            <input type="search" placeholder="搜索" required>
+                            <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- col-md-8 -->
+        </div>
+    </header>
+</div>
+<div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
+<div class="copyrights">Modified by <a href="http://zmrenwu.com/">追梦人物的博客</a></div>
+
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <!--左侧-->
+            <main class="col-md-8">
+                <!--左边八列，index 和single不同 所以留好位置-->
+                {% block left %}
+
+                {% endblock %}
+            </main>
+            <!--右侧-->
+            <aside class="col-md-4">
+                <!--在index与single里面都有这些共同的页面，但是，single多了一个目录，所以在这里留个目录空间，index不重写，
+                    single重写，toc 是目录的意思-->
+                {% block toc %}
+
+                {% endblock %}
+                <div class="widget widget-recent-posts">
+                    <h3 class="widget-title">最新文章</h3>
+                    {% getlatestartices as latestartices %}
+                    {% for aricle in latestartices %}
+                    <ul>
+                        <li>
+                            <a href="{% url 'blog:detail' aricle.id %}">{{ aricle.title }}</a>
+                        </li>
+                    </ul>
+                    {% empty %}
+                    没有书籍
+                    {% endfor %}
+
+                </div>
+                <div class="widget widget-archives">
+                    <h3 class="widget-title">归档</h3>
+                    {% getarchives as archives %}
+                    <ul>
+                        {% for archive in archives %}
+                        <li>
+                            <!--前端页面显示年月日，归档不需要日，可以点month和year-->
+                            <a href="{% url 'blog:archive' archive.year archive.month %}">{{ archive.year }}年{{ archive.month }}月</a>
+                        </li>
+                        {% empty %}
+                        没有标签
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="widget widget-category">
+                    <h3 class="widget-title">分类</h3>
+                    {% getclassify as classifys %}
+                    {% for classify in classifys %}
+                    <ul>
+                        <li>
+                            <a href="{% url 'blog:classify' classify.id %}">{{classify.title}} <span class="post-count">({{classify.article_set.count}})</span></a>
+                        </li>
+                    </ul>
+                    {% empty %}
+                    没有分类
+                    {% endfor %}
+
+                </div>
+
+                <div class="widget widget-tag-cloud">
+                    <h3 class="widget-title">标签云</h3>
+                    {% gettag as tags %}
+                    {% for tag in tags %}
+                    <ul>
+                    <li>
+                        <a href="{% url 'blog:tag' tag.id %}">{{tag.title}}</a>
+                    </li>
+                     </ul>
+                     {% empty %}
+                    没有标签
+                    {% endfor %}
+
+
+
+                </div>
+                <div class="rss">
+                    <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer id="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="copyright">&copy 2017 - 采集自<a href="http://www.cssmoban.com/"
+                                                        target="_blank" title="模板之家">模板之家</a>
+                    - 由<a href="http://zmrenwu.com/" title="网页模板" target="_blank">追梦人物的博客</a>修改
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Mobile Menu -->
+<div class="overlay overlay-hugeinc">
+    <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="full-width.html">博客</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="contact.html">联系</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script src="/static/js/script.js"></script>
+
+</body>
+</html>

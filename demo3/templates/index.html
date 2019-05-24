@@ -1,0 +1,73 @@
+<!--引入父模板-->
+{% extends 'base.html'%}
+
+<!--引入自建标签-->
+{% load extend_fun %}
+{% block left %}
+
+<!--将views视图中写的函数  获取的文章列表拿过来-->
+{% if page.object_list %}
+<!--遍历文章列表-->
+    {% for article in page.object_list %}
+        <article class="post post-{{ article.id }}">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            <!--文章名-->
+            <a href="{% url 'blog:detail' article.id %}">{{ article.title }}</a>
+        </h1>
+        <div class="entry-meta">
+            <!--分类，一找多，直接点获得对象，在点获得属性-->
+            <span class="post-category"><a href="#">{{ article.classify.title }}</a></span>
+            <span class="post-date"><a href="#">
+                <!--发布时间-->
+            <time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ article.create_time }}</time></a></span>
+            <!--发布作者-->
+            <span class="post-author"><a href="#">{{ article.auther.username }}</a></span>
+            <!--评论,由一找多，先点出来所有的评论，再点数目-->
+            <span class="comments-link"><a href="#">{{ article.comment_set.count }} 评论</a></span>
+
+            <span class="views-count"><a href="#">{{ article.views }} 阅读</a></span>
+        </div>
+    </header>
+    <div class="entry-content clearfix">
+        <p>
+            <!--文本摘要，直接使用过滤器，进行筛选十个字-->
+            {#{{ article.body|truncatechars:15 }}...}#}
+
+            <!--使用自建过滤器-->
+            {{ article.body|myslice:20 }}
+        </p>
+        <div class="read-more cl-effect-14">
+            <a href="{% url 'blog:detail' article.id %}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+        </div>
+        <hr>
+    </div>
+</article>
+    {% empty %}
+    没有文章
+    {% endfor %}
+{% else %}
+没有文章列表
+{%endif%}
+
+
+<!-- 简单分页效果
+<div class="pagination-simple">
+    <a href="#">上一页</a>
+    <span class="current">第 6 页 / 共 11 页</span>
+    <a href="#">下一页</a>
+</div>
+-->
+<div class="pagination">
+    <!--循环遍历paginator这个对象的page函数，就得到分页数字-->
+
+    <ul>
+        <!--获得所有分页页码-->
+        {% for num in page.paginator.page_range %}
+        <li><a href="/?page={{num}}">{{ num }} </a></li>
+        {% endfor %}
+
+    </ul>
+</div>
+{% endblock %}
+

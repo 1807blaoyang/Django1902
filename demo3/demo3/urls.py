@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.conf.urls import url,include
+# 项目路由
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 构成：APP名字+ include(（分发的应用路由）,+namespace),  注册应用
+    url('comment/', include("comment.urls", namespace="comment")),
+    url('',include("blog.urls",namespace="blog")),
+
 ]

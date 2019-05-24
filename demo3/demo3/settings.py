@@ -56,7 +56,9 @@ ROOT_URLCONF = 'demo3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [],
+        # 注册模板
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 注册js， css， jquery，img 文件
+STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]

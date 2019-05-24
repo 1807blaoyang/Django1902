@@ -34,7 +34,7 @@ class Article(models.Model):
     body = models.TextField(verbose_name="正文")
     # 作者.   一个作者有多篇文章。
     auther = models.ForeignKey(User,on_delete=models.CASCADE,verbose_name="作者")
-    # 阅读数 默认为0
+    #     # 阅读数 默认为0
     views = models.IntegerField(default=0,verbose_name="阅读次数")
     # 发表时间
     create_time = models.DateTimeField(auto_now_add=True,verbose_name="发表时间")
