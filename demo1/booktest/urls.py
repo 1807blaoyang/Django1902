@@ -3,7 +3,7 @@ from django.conf.urls import url
 # 将视图文件导入
 from . import views
 # 解除硬编码
-app_name = "booktest"
+app_name = "polls"
 # 设计url，应用路由
 urlpatterns = [
     # url(r'^index&',views.index),
@@ -22,5 +22,7 @@ urlpatterns = [
 
 
     # 添加图书
-    url(r'^addbook/(\d+)/$',views.addbook,name="addbook")
+    url(r'^addbook/$',views.addbook,name="addbook"),
+    # 编辑角色
+    url(r'^edithero/(\d+)/$', views.edithero,name="edithero"),
 ]

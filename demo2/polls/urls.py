@@ -19,4 +19,9 @@ urlpatterns = [
     url(r'logout/$',views.logout,name="logout"),
     # 注册
     url(r'^register/$', views.register, name="register"),
+    # 激活账户
+    url(r'^active/(d+)/$',views.active,name="active"),
+    # 获取验证码
+    url(r'^verify/$',views.verify,name="verify"),
 ]
+

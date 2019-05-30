@@ -1,7 +1,13 @@
 from django.conf.urls import url
 from . import views
+from haystack.views import SearchView
+
 app_name = "blog"
+app_name = "search"
 urlpatterns = [
+    #新建search路由，当点击搜索时，进入到搜索页面
+    # ur l(r'^$', SearchView(), name='haystack_search'),
+    url(r'^search/$',SearchView(), name="search"),
     # 点击进入自定义头像,这里用到的是继承视图的写法，所以与传统的url写法不同
     url(r'^addimg/$',views.AddImg.as_view(), name="addimg"),
     # 点击联系，进入联系页面

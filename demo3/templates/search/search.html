@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索结果</title>
+</head>
+<body>
+{ % if query % }
+<h3>搜索结果如下：</h3>
+{ % for article in page.object_list % }
+    <!--显示搜索文章的名字-->
+    <li>{{ article.object.title }}}</li>
+    <a href="//"></a><br/>
+{ % empty % }
+    <p>啥也没找到</p>
+{ % endfor % }
+
+</body>
+</html>

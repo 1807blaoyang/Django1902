@@ -7,10 +7,11 @@
 </head>
 <body>
     <div class="container">
-        <form action="/booktest/addbook/{{bookid}}" method="post">
-            书名：<input type="text" name="btitle"/>
-            <br>
-            出版日期：<input type="date" name="bdate" />
+        <h4>添加书籍</h4>
+        <form action="/booktest/addbook/" method="post">
+            书籍名字：<input type="text" name="bttile"/>
+            <br>出版日期：<input type="date" name="bdate" /><br>
+            <input type="submit" name="tijiao" value="提交">
         </form>
     </div>
 </body>

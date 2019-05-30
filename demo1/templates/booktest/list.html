@@ -11,11 +11,12 @@
     {% if allbook %}
         <ul>
             {%for book in allbook%}
-            {# <a href="/booktest/detail/{{book.id}}">{{ book.bttile }}</a>  #}
 
+            {# <a href="/booktest/detail/{{book.id}}">{{ book.bttile }}</a>  #}
+            {#软编码，解决硬编码#}
             <li><h4><a href="/booktest/detail/{{book.id}}">{{ book.bttile }}</a>
                      <a href="/booktest/deletebook/{{book.id}}">删除</a>
-                     <a href="/booktest/addbook/{{book.id}}">增加图书</a></h4></li>
+                     <a href="/booktest/addbook/">增加图书</a></h4></li>
             {% empty %}
             没有书籍信息
             {% endfor %}

@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=30)),
                 ('gender', models.BooleanField(default=True)),
                 ('skill', models.CharField(max_length=50, null=True)),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='booktest.BookInfo')),
+                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.BookInfo')),
             ],
         ),
     ]

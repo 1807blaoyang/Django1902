@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-<h1>详情页</h1>
+<h3>详情页</h3>
 <!--测试代码-->
     <!--{% if book %}-->
     <!--收到详情-->
@@ -19,13 +19,20 @@
         <ul>
             <!--为什么路径可以直接使用hero.info    就在这一步代码：获得了所有的英雄-->
             {% for hero in book.heroinfo_set.all %}
-                <li>---{{ hero.name }}---{{ hero.gender }}---{{ hero.skill }}---<a href="/booktest/deletehero/{{hero.id}}">删除</a></li>
+                <li>---{{ hero.name }}---{{ hero.gender }}---{{ hero.skill }}---
+                    <a href="/booktest/deletehero/{{hero.id}}/">删除</a>
+
+                    <a href="/booktest/edithero/{{hero.id}}/">编辑</a>
+                </li>
             {% empty %}
             无角色
 
             {% endfor %}
         </ul>
-    <a href="/booktest/addhero/{{ book.id }}">添加角色</a>
+    <!--添加角色超链接-->
+    <a href="/booktest/addhero/{{ book.id }}/">添加角色</a>
+    <!--编辑角色超链接-->
+
 {% else %}
 未接收到书籍
 {% endif %}

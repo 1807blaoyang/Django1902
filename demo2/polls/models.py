@@ -34,6 +34,7 @@ class Choice(models.Model):
 class User(models.Model):
     name = models.CharField(max_length=20,verbose_name="姓名")
     pwd = models.CharField(max_length=20,verbose_name="密码")
+    is_active = models.BooleanField(default=True,verbose_name="是否激活")
     class Meta():
         verbose_name = "用户表"
         verbose_name_plural = verbose_name

@@ -22,6 +22,6 @@ from django.conf.urls import url,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 将url文件引入,注意事项，解除硬编码时，namespance是写在函数里的
-    url(r'booktest/', include('booktest.urls',namespace = "booktest")),
+    url(r'polls/', include('polls.urls',namespace = "polls")),
 
 ]

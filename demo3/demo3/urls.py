@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 构成：APP名字+ include(（分发的应用路由）,+namespace),  注册应用
     url('comment/', include("comment.urls", namespace="comment")),
+    # 新建我们的serch路由
+    url('search/', include('haystack.urls',namespace="search")),
     url('',include("blog.urls",namespace="blog")),
 
 ]

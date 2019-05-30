@@ -11,7 +11,7 @@ from .models import BookInfo,HeroInfo
 def index(request):
     # return HttpResponse("这是首页")
     # 1. 加载模板
-    template = loader.get_template("booktest/index.html")
+    template = loader.get_template("polls/index.html")
 
     # 2.构造上下文
     context = {}
@@ -20,14 +20,14 @@ def index(request):
     render1 = template.render(context=context)
     return HttpResponse(render1)
 def list(request):
-    # loader.get_template("booktest/list.html")
+    # loader.get_template("polls/list.html")
     # 获取所有的书
     allbook = BookInfo.objects.all()
     print(allbook)
     # 构造上下文
     context = {"allbook":allbook}
     # 简写   渲染动态数据
-    render2 = render(request,"booktest/list.html",context)
+    render2 = render(request,"polls/list.html",context)
     return HttpResponse(render2)
     # return HttpResponse("这是列表")
 # 详情页
@@ -41,25 +41,32 @@ def detail(request,id):
         return HttpResponse("对不起，没有书籍")
     # 构造上下文
     context = {"book": book}
-    return render(request, 'booktest/detail.html', context)
+    return render(request, 'polls/detail.html', context)
 
-# 删除功能（重定向）
+# 删除书籍（重定向）
 def deletebook(request,id):
     # 执行删除
     book = BookInfo.objects.get(pk=id).delete()
     # print(book)
     # return HttpResponse("成功！")
-    return HttpResponseRedirect("/booktest/list/")
-def addbook(request,id):
-    # 将参数id定义
-    book =BookInfo.object.get(pk=id)
+    return HttpResponseRedirect("/polls/list/")
+# 增加书籍
+def addbook(request):
+    if request.method == "GET":
+        print("我进来了")
+        return render(request, 'polls/addbook.html/')
+    # # 将参数id定义
+    # book =BookInfo.object.get(pk=id)
     # 存储表单数据：
-    book1 = BookInfo()
-    book1.bttile = request.POST["btitle"]
-    book1.bdate = request.POST["bdate"]
-    # return HttpResponse("成功")
+    elif request.method=="POST":
+        book = BookInfo()
+        book.bttile = request.POST["bttile"]
+        book.bdate = request.POST["bdate"]
+        book.save()
+        return HttpResponseRedirect("/polls/list/")
+        # return HttpResponse("成功")
 
-# 删除英雄
+# 删除角色
 def deletehero(request,id):
     # 依靠id获取该英雄,然后删除
     hero = HeroInfo.objects.get(pk=id)
@@ -69,17 +76,17 @@ def deletehero(request,id):
     # print(book)
     # return HttpResponse("成功！")
     # 重定向的详情页
-    return HttpResponseRedirect("/booktest/detail/%s"%(bookid))
+    return HttpResponseRedirect("/polls/detail/%s"%(bookid))
+
 # 添加角色
 def addhero(request,id):
     # return HttpResponse("chenggong !")
     # 经典错误！！！小细节！！！！ 并不是路由，前面没有斜杠
-    # return render(request, '/booktest/addhero.html/')
+    # return render(request, '/polls/addhero.html/')
     # 进行表单的提交，利用get和post请求的切换
     if request.method == "GET":
         print("我进来了")
-        return render(request, 'booktest/addhero.html/', context={"bookid": id})
-
+        return render(request, 'polls/addhero.html/',context={"bookid": id})
 
     elif request.method =="POST":
         # 将参数id定义  wei书籍的id 在数据库中存的虽然是一个id 但其实获得是
@@ -90,11 +97,33 @@ def addhero(request,id):
         hero.gender = request.POST["sex"]
         hero.skill = request.POST["skill"]
         # 所属书籍   !!!! hero.book   由多地一方直接点出来
-        hero.book = book
         # 保存
         hero.save()
         # return HttpResponse("chenggong")
-        return HttpResponseRedirect("/booktest/detail/%s" % (id))
+        return HttpResponseRedirect("/polls/detail/%s/" % (id))
+# 修改角色
+def edithero(request,id):
+    hero = HeroInfo.objects.get(pk=id)
+    # 进行逻辑判断
+    #     return render(request,"polls/edithero.html")
+    if request.method == "GET":
+        print("我进来了")
+        return render(request, 'polls/edithero.html/',context={"hero": hero})
+
+    elif request.method =="POST":
+        # 将参数id定义  wei书籍的id 在数据库中存的虽然是一个id 但其实获得是
+
+        # 存储表单数据：
+        # hero = HeroInfo()
+        hero.name = request.POST["username"]
+        hero.gender = request.POST["sex"]
+        hero.skill = request.POST["skill"]
+        # 所属书籍   !!!! hero.book   由多地一方直接点出来
+        # 保存
+        book = hero.book
+        hero.save()
+        # return HttpResponse("chenggong")
+        return HttpResponseRedirect("/polls/detail/%s/" % (book.id))
 
 
 

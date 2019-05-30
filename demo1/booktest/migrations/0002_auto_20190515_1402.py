@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('booktest', '0001_initial'),
+        ('polls', '0001_initial'),
     ]
 
     operations = [
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='heroinfo',
             name='book',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='booktest.BookInfo', verbose_name='所属书籍'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.BookInfo', verbose_name='所属书籍'),
         ),
         migrations.AlterField(
             model_name='heroinfo',
