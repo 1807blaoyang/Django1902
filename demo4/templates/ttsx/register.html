@@ -7,6 +7,12 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="/static/js/register.js"></script>
+	<style type="text/css">
+		.b{
+			color: red;
+			font-size: 20px;
+		}
+	</style>
 </head>
 <body>
 	<div class="register_con">
@@ -29,7 +35,6 @@
 
 						<label>用户名:</label>
 						<input type="text" name="user_name" id="user_name" placeholder="请输入用户名">
-						{{err}}
 						{{err1}}
 					</li>					
 					<li>
@@ -54,7 +59,9 @@
 					</li>
 					<li class="reg_sub">
 						<input type="submit" value="注 册" name="zhuce">
+						<b class="b">{{err}}</b>
 					</li>
+
 				</ul>				
 				</form>
 			</div>
